@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
+import {  Text,
   TextInput,
-  Button,
   StyleSheet,
   SafeAreaView,
+  ImageBackground,
+  Image,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 
 const LoginScreen = ({ navigation }) => {
@@ -18,50 +20,96 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Login</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your index number"
-          value={indexNumber}
-          onChangeText={setIndexNumber}
-          keyboardType="numeric"
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-        />
-        <Button title="Login" onPress={handleLogin} />
-      </View>
-    </SafeAreaView>
+    <ImageBackground
+      source={require("../assets/images/blue_Splash.png")} // Update the path to your background image
+      style={styles.background}
+    >
+      <SafeAreaView style={styles.safeArea}>
+        <KeyboardAvoidingView
+          behavior="padding"
+          keyboardVerticalOffset={Platform.OS === "ios" ? 30 : 0}
+          style={styles.container}
+        >
+          <Image
+            source={require("../assets/images/Gctu_logo.png")} // Update the path to your logo image
+            style={styles.logo}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Index Number"
+            placeholderTextColor="#aaa"
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            placeholderTextColor="#aaa"
+            secureTextEntry
+          />
+          <TouchableOpacity style={styles.loginButton}>
+            <Text style={styles.loginButtonText}>Log in</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.forgotPasswordButton}>
+            <Text style={styles.forgotPasswordText}>Forgot password?</Text>
+          </TouchableOpacity>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#8B0000", // Match your app's background color
   },
-  container: {
+  background: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
-  title: {
-    fontSize: 24,
-    marginBottom: 20,
-    color: "#fff",
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 10,
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    marginBottom: 60,
   },
   input: {
-    width: "80%",
-    padding: 10,
-    marginBottom: 10,
+    width: 360,
+    height: 50,
     backgroundColor: "#fff",
-    borderRadius: 5,
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    fontSize: 16,
+    marginBottom: 15,
+    borderColor: "#e0a828",
+    borderWidth: 3,
+  },
+  loginButton: {
+    width: "100%",
+    height: 50,
+    backgroundColor: "#e0a828",
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 15,
+  },
+  loginButtonText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  forgotPasswordButton: {
+    marginBottom: 20,
+    marginTop: 20,
+  },
+  forgotPasswordText: {
+    color: "#e0a828",
+    fontSize: 16,
+    textDecorationLine: "",
   },
 });
 

@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { SafeAreaView, StatusBar, StyleSheet, useColorScheme } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import SplashScreen from './src/SplashScreen';
-import MainScreen from './src/MainScreen';
-import LoginScreen from './src/LoginScreen';
+import React, { useState } from "react";
+import { StatusBar, StyleSheet, useColorScheme } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import SplashScreen from "./src/SplashScreen";
+import MainScreen from "./src/MainScreen";
+import LoginScreen from "./src/LoginScreen";
+import RegisterScreen from "./src/RegisterScreen";
 
 const Stack = createStackNavigator();
 
@@ -17,21 +19,26 @@ const App = () => {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView  style={styles.safeArea}>
       <StatusBar
-        barStyle={colorScheme === 'dark' ? 'light-content' : 'dark-content'}
-        backgroundColor={colorScheme === 'dark' ? '#000' : '#fff'}
+        hidden={false} 
+        barStyle="default" 
+        backgroundColor="transparent" 
+        translucent={true}
       />
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           {isSplashVisible ? (
             <Stack.Screen name="Splash">
-              {props => <SplashScreen {...props} onAnimationEnd={handleAnimationEnd} />}
+              {(props) => (
+                <SplashScreen {...props} onAnimationEnd={handleAnimationEnd} />
+              )}
             </Stack.Screen>
           ) : (
             <>
               <Stack.Screen name="Main" component={MainScreen} />
               <Stack.Screen name="Login" component={LoginScreen} />
+              <Stack.Screen name="Register" component={RegisterScreen} />
             </>
           )}
         </Stack.Navigator>
@@ -43,7 +50,6 @@ const App = () => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#ffffff', // Set a default background color that matches your app theme
   },
 });
 

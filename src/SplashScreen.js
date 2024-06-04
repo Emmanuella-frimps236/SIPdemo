@@ -5,6 +5,7 @@ import {
   Animated,
   ImageBackground,
   SafeAreaView,
+  StatusBar
 } from "react-native";
 
 const SplashScreen = ({ onAnimationEnd }) => {
@@ -33,6 +34,7 @@ const SplashScreen = ({ onAnimationEnd }) => {
         style={styles.background}
       >
         <View style={styles.container}>
+        <StatusBar  backgroundColor='#0b053f'barStyle="default" />
           <Animated.Image
             source={require("../assets/images/Gctu_logo.png")}
             style={[styles.logo, { opacity: logoOpacity }]}
@@ -46,7 +48,7 @@ const SplashScreen = ({ onAnimationEnd }) => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#8B0000", // Match your app's background color
+    backgroundColor:'#0b053f',
   },
   background: {
     flex: 1,
